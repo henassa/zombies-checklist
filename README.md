@@ -2,7 +2,7 @@
 
 Ma checklist pour les maps Zombies de Call of Duty, de World at War à Black Ops 7 : quêtes principales, armes miracle, secrets, reliques, etc.
 
-Pas de framework : du HTML, un peu de JS et Tailwind. La progression est stockée dans le `localStorage` du navigateur. Les boutons Exporter / Importer servent à la transférer sur un autre appareil.
+Pas de framework. La progression est stockée dans le `localStorage` du navigateur. Les boutons Exporter / Importer servent à la transférer sur un autre appareil.
 
 ## Lancer en local
 
@@ -61,4 +61,4 @@ GitHub Pages depuis la branche `main`, à la racine. Après une mise à jour, ch
 
 ## Sources
 
-Les étapes et indices viennent en grande partie de [codzombiesguides.com](https://codzombiesguides.com), [codzombieguides.com](https://www.codzombieguides.com) et [cod-zombies.com](https://cod-zombies.com), résumés et reformulés. Projet perso, sans lien avec Activision.
+Les étapes et indices viennent en grande partie de [codzombiesguides.com](https://codzombiesguides.com), [codzombieguides.com](https://www.codzombieguides.com) et [cod-zombies.com](https://cod-zombies.com), résumés et reformulés.
