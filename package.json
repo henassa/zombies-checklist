@@ -1,0 +1,12 @@
+{
+  "name": "zombies-checklist",
+  "private": true,
+  "scripts": {
+    "build": "tailwindcss -i src/input.css -o tailwind.css --minify",
+    "dev": "tailwindcss -i src/input.css -o tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  }
+}

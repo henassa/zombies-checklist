@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@source "../index.html";
+@source "../app.js";
+
+/* couleurs système iOS, version claire puis sombre */
+@theme {
+  --color-bg: #F2F2F7;
+  --color-cell: #FFFFFF;
+  --color-fill: #E3E3E8;
+  --color-label: #000000;
+  --color-label2: #3C3C4399;
+  --color-label3: #3C3C434D;
+  --color-sep: #C6C6C8;
+  --color-tint: #007AFF;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #000000;
+    --color-cell: #1C1C1E;
+    --color-fill: #2C2C2E;
+    --color-label: #FFFFFF;
+    --color-label2: #EBEBF599;
+    --color-label3: #EBEBF54D;
+    --color-sep: #38383A;
+    --color-tint: #0A84FF;
+  }
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; color-scheme: light dark; }
+  body {
+    @apply bg-bg text-label font-sans antialiased;
+    font-size: 17px;
+    line-height: 1.35;
+    -webkit-tap-highlight-color: transparent;
+  }
+  :focus-visible { outline: 3px solid color-mix(in srgb, var(--color-tint) 50%, transparent); outline-offset: 2px; border-radius: 8px; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition-duration: 0s !important; animation: none !important; }
+  }
+}
+
+/* animations */
+@layer components {
+  :root { --ease-out: cubic-bezier(.22, .9, .3, 1); --ease-spring: cubic-bezier(.34, 1.4, .5, 1); }
+
+  /* anime la hauteur sans la connaître à l'avance */
+  .fold {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .32s var(--ease-out);
+  }
+  .fold > * { overflow: hidden; min-height: 0; opacity: 0; transition: opacity .2s ease; }
+  .fold[data-open] { grid-template-rows: 1fr; }
+  .fold[data-open] > * { opacity: 1; transition: opacity .28s ease .06s; }
+
+  .chev { transition: transform .32s var(--ease-out); }
+
+  .bar-fill { transition: width .55s var(--ease-out); }
+
+  .enter { animation: enter .42s var(--ease-out) both; }
+  @keyframes enter {
+    from { opacity: 0; transform: translateY(10px) scale(.985); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .tile { transition: transform .18s var(--ease-out), background-color .25s ease, box-shadow .25s ease; }
+  .tile:active { transform: scale(.96); }
+  @media (hover: hover) {
+    .tile:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
+    .tile:active { transform: scale(.96); }
+  }
+
+  .pop { animation: pop .38s var(--ease-spring); }
+  @keyframes pop {
+    0% { transform: scale(.6); }
+    60% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+  }
+
+  .item-text { transition: color .25s ease; }
+  .item-text.is-done { color: var(--color-label2); }
+
+  .row-anim { transition: height .3s var(--ease-out), opacity .2s ease; overflow: hidden; }
+  .row-anim.leaving { height: 0 !important; opacity: 0; }
+
+  .map-card { transition: box-shadow .5s ease; }
+  .map-card.glow { box-shadow: 0 0 0 2px var(--c), 0 0 24px color-mix(in srgb, var(--c) 35%, transparent); }
+
+  .tip-btn { color: var(--color-label3); transition: color .2s ease, background-color .2s ease, transform .15s ease; }
+  .tip-btn:active { transform: scale(.88); }
+  .tip-btn.is-open { color: var(--c, var(--color-tint)); background: color-mix(in srgb, var(--c, var(--color-tint)) 14%, transparent); }
+  .tip-text { background: color-mix(in srgb, var(--c, var(--color-tint)) 9%, var(--color-fill) 40%); }
+}
+
+@layer components {
+  /* case ronde façon Rappels, couleur du jeu via --c */
+  .check {
+    appearance: none;
+    flex: none;
+    width: 22px; height: 22px;
+    margin-top: 1px;
+    border-radius: 9999px;
+    border: 1.5px solid var(--color-sep);
+    background: transparent;
+    cursor: pointer;
+    transition: background-color .15s, border-color .15s, transform .1s;
+  }
+  .check:active { transform: scale(.9); }
+  .check:checked {
+    border-color: var(--c, var(--color-tint));
+    background: var(--c, var(--color-tint)) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat;
+  }
+
+  .switch {
+    appearance: none;
+    position: relative;
+    flex: none;
+    width: 51px; height: 31px;
+    border-radius: 9999px;
+    background: var(--color-fill);
+    cursor: pointer;
+    transition: background-color .2s;
+  }
+  .switch::after {
+    content: "";
+    position: absolute; top: 2px; left: 2px;
+    width: 27px; height: 27px;
+    border-radius: 9999px;
+    background: #fff;
+    box-shadow: 0 3px 8px rgba(0,0,0,.15), 0 1px 1px rgba(0,0,0,.16);
+    transition: transform .2s;
+  }
+  .switch:checked { background: #34C759; }
+  .switch:checked::after { transform: translateX(20px); }
+
+  /* séparateur décalé à gauche comme sur iOS */
+  .row { position: relative; }
+  .row + .row::before {
+    content: "";
+    position: absolute; top: 0; right: 0;
+    left: var(--inset, 3.25rem);
+    height: 0.5px;
+    background: var(--color-sep);
+  }
+}

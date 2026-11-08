@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F2F2F7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Zombies">
+  <title>Checklist Zombies</title>
+  <meta name="description" content="Checklist de tous les Easter eggs, armes miracle et objectifs des maps Call of Duty Zombies.">
+  <link rel="stylesheet" href="tailwind.css?v=202611082013">
+</head>
+<body class="min-h-screen">
+  <div class="mx-auto max-w-3xl px-4 pb-16 pt-[max(1.5rem,env(safe-area-inset-top))]">
+
+    <header class="pt-6 pb-4">
+      <h1 class="font-display text-[34px] leading-tight font-bold tracking-tight">Checklist Zombies</h1>
+      <p id="globalCount" class="mt-0.5 text-[15px] text-label2"></p>
+    </header>
+
+    <div class="sticky top-0 z-20 -mx-4 px-4 py-2 bg-bg/85 backdrop-blur-xl backdrop-saturate-150">
+      <label class="flex items-center gap-2 h-9 px-2.5 rounded-[10px] bg-fill text-label2">
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="size-[17px] shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5"/></svg>
+        <input id="search" type="search" placeholder="Rechercher" autocomplete="off"
+          class="flex-1 min-w-0 bg-transparent text-label placeholder:text-label2 outline-none text-[17px]">
+      </label>
+    </div>
+
+    <nav id="games" aria-label="Jeux" class="grid grid-cols-2 sm:grid-cols-3 gap-2.5 mt-3"></nav>
+
+    <div class="mt-6 rounded-xl bg-cell overflow-hidden">
+      <label class="row flex items-center justify-between gap-4 px-4 min-h-11 py-1.5 cursor-pointer" style="--inset:1rem">
+        <span>Masquer ce qui est fait</span>
+        <input id="hideDone" type="checkbox" class="switch">
+      </label>
+      <label class="row flex items-center justify-between gap-4 px-4 min-h-11 py-1.5 cursor-pointer" style="--inset:1rem">
+        <span>Afficher tous les indices <span id="tipCount" class="text-[13px] text-label2"></span></span>
+        <input id="showTips" type="checkbox" class="switch">
+      </label>
+      <div class="row flex flex-wrap items-center gap-x-5 gap-y-1 px-4 min-h-11 py-2 text-tint" style="--inset:1rem">
+        <button id="expandAll" type="button" class="active:opacity-50">Tout ouvrir</button>
+        <button id="collapseAll" type="button" class="active:opacity-50">Tout fermer</button>
+        <span class="flex-1"></span>
+        <button id="exportBtn" type="button" class="active:opacity-50">Exporter</button>
+        <label class="cursor-pointer active:opacity-50">Importer<input id="importFile" type="file" accept="application/json" class="hidden"></label>
+      </div>
+    </div>
+
+    <main id="main" class="mt-8"></main>
+
+    <footer class="mt-10 px-4 text-[13px] text-label2 text-center">
+      Ta progression reste dans ce navigateur. Exporte-la pour la reprendre sur un autre appareil.<br>
+      Projet de fan, non affilié à Activision.
+    </footer>
+  </div>
+
+  <script src="data.js?v=202611082013"></script>
+  <script src="tips.js?v=202611082013"></script>
+  <script src="app.js?v=202611082013"></script>
+</body>
+</html>
